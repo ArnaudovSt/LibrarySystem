@@ -1,5 +1,6 @@
 ﻿using System;
 using LibrarySystem.Data;
+using LibrarySystem.Data.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

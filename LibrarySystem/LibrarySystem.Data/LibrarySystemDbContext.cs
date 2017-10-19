@@ -4,7 +4,6 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using LibrarySystem.Data.Models;
 using LibrarySystem.Data.Models.Contracts;
-using LibrarySystem.Web.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LibrarySystem.Data

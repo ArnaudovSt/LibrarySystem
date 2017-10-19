@@ -17,6 +17,10 @@ namespace LibrarySystem.Web.App_Start
     using LibrarySystem.Data;
     using LibrarySystem.Data.Repositories;
     using System.Reflection;
+    using LibrarySystem.Web.Infrastructure.ActionFilters;
+    using Ninject.Web.Mvc.FilterBindingSyntax;
+    using System.Web.Mvc;
+    using LibrarySystem.Web.Infrastructure.Attributes;
 
     public static class NinjectWebCommon
     {
@@ -88,6 +92,8 @@ namespace LibrarySystem.Web.App_Start
                 .InRequestScope();
             kernel.Bind(typeof(IEfRepostory<>)).To(typeof(EfRepostory<>)).InRequestScope();
             kernel.Bind<IEfUnitOfWork>().To<EfUnitOfWork>().InRequestScope();
+
+            kernel.BindFilter<SaveChangesFilter>(FilterScope.Controller, 0).WhenActionMethodHas<SaveChangesAttribute>();
         }
     }
 }

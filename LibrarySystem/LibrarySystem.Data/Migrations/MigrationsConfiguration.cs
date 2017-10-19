@@ -1,4 +1,4 @@
-using LibrarySystem.Web.Models;
+using LibrarySystem.Data.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
