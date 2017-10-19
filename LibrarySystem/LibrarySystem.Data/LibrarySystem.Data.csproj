@@ -56,6 +56,10 @@
     <Compile Include="LibrarySystemDbContext.cs" />
     <Compile Include="Migrations\MigrationsConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EfRepository.cs" />
+    <Compile Include="Repositories\IEfRepostory.cs" />
+    <Compile Include="UnitOfWork\EfUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IEfUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,5 +71,6 @@
       <Name>LibrarySystem.Data.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

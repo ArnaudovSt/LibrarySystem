@@ -1,3 +1,7 @@
+using LibrarySystem.Web.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace LibrarySystem.Data.Migrations
 {
     using System;
@@ -16,18 +20,28 @@ namespace LibrarySystem.Data.Migrations
 
         protected override void Seed(LibrarySystem.Data.LibrarySystemDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            this.SeedAdmin(context);
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+        private void SeedAdmin(LibrarySystemDbContext context)
+        {
+            const string AdministratorUserName = "admin@admin.com";
+            const string AdministratorPassword = "123qwe";
+
+            if (!context.Roles.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var role = new IdentityRole { Name = "Admin" };
+                roleManager.Create(role);
+
+                var userStore = new UserStore<User>(context);
+                var userManager = new UserManager<User>(userStore);
+                var user = new User { UserName = AdministratorUserName, Email = AdministratorUserName, EmailConfirmed = true };
+                userManager.Create(user, AdministratorPassword);
+
+                userManager.AddToRole(user.Id, "Admin");
+            }
         }
     }
 }
