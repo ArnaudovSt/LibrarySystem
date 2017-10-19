@@ -53,6 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\DataModel.cs" />
+    <Compile Include="Author.cs" />
+    <Compile Include="Book.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="Contracts\IDeletable.cs" />
+    <Compile Include="Contracts\IAuditable.cs" />
+    <Compile Include="Genre.cs" />
+    <Compile Include="Lending.cs" />
+    <Compile Include="Rating.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
