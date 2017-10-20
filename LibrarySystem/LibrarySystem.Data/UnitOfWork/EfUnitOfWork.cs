@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bytes2you.Validation;
 
 namespace LibrarySystem.Data.UnitOfWork
 {
@@ -12,6 +13,8 @@ namespace LibrarySystem.Data.UnitOfWork
 
         public EfUnitOfWork(LibrarySystemDbContext context)
         {
+            Guard.WhenArgument(context, "Unit of work dbcontext").IsNull().Throw();
+
             this.context = context;
         }
 

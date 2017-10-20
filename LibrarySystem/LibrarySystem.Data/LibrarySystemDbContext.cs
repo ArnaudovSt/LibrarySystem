@@ -21,7 +21,6 @@ namespace LibrarySystem.Data
         public IDbSet<Book> Books { get; set; }
         public IDbSet<Comment> Comments { get; set; }
         public IDbSet<Genre> Genres { get; set; }
-        public IDbSet<Lending> Lendings { get; set; }
         public IDbSet<Rating> Ratings { get; set; }
 
         public override int SaveChanges()
@@ -39,7 +38,7 @@ namespace LibrarySystem.Data
                             e.Entity is IAuditable && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
             {
                 var entity = (IAuditable)entry.Entity;
-                if (entry.State == EntityState.Added && entity.CreatedOn == default(DateTime))
+                if (entry.State == EntityState.Added && entity.CreatedOn == null)
                 {
                     entity.CreatedOn = DateTime.Now;
                 }

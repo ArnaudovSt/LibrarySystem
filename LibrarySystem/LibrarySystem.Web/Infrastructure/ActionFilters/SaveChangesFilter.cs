@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Bytes2you.Validation;
 using LibrarySystem.Data.UnitOfWork;
 
 namespace LibrarySystem.Web.Infrastructure.ActionFilters
@@ -13,6 +14,8 @@ namespace LibrarySystem.Web.Infrastructure.ActionFilters
 
         public SaveChangesFilter(IEfUnitOfWork unitOfWork)
         {
+            Guard.WhenArgument(unitOfWork, "Save changes unitOfWork").IsNull().Throw();
+
             this.unitOfWork = unitOfWork;
         }
 

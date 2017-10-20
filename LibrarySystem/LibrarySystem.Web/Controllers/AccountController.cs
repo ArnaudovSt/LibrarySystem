@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using LibrarySystem.Data.Models;
+using LibrarySystem.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using LibrarySystem.Web.Models;
 
 namespace LibrarySystem.Web.Controllers
 {

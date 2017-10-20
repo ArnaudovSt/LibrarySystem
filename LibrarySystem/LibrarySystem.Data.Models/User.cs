@@ -13,12 +13,10 @@ namespace LibrarySystem.Data.Models
 
     public class User : IdentityUser
     {
-        private ICollection<Lending> lendings;
         private ICollection<Book> wantToRead;
 
         public User()
         {
-            this.lendings = new HashSet<Lending>();
             this.wantToRead = new HashSet<Book>();
         }
 
@@ -33,19 +31,6 @@ namespace LibrarySystem.Data.Models
 
         [DataType(DataType.DateTime)]
         public DateTime? ModifiedOn { get; set; }
-
-        public virtual ICollection<Lending> Lendings
-        {
-            get
-            {
-                return this.lendings;
-            }
-
-            set
-            {
-                this.lendings = value;
-            }
-        }
 
         public virtual ICollection<Book> WantToRead
         {

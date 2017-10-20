@@ -18,8 +18,6 @@ namespace LibrarySystem.Data.Models
 
         private ICollection<Genre> genres;
 
-        private ICollection<Lending> lendings;
-
         private ICollection<Comment> comments;
 
         private ICollection<Rating> ratings;
@@ -30,7 +28,6 @@ namespace LibrarySystem.Data.Models
         {
             this.authors = new HashSet<Author>();
             this.genres = new HashSet<Genre>();
-            this.lendings = new HashSet<Lending>();
             this.comments = new HashSet<Comment>();
             this.ratings = new HashSet<Rating>();
             this.wantedBy = new HashSet<User>();
@@ -45,7 +42,7 @@ namespace LibrarySystem.Data.Models
         public string ISBN { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [StringLength(128, ErrorMessage = "Book Description Invalid Length", MinimumLength = 1)]
+        [StringLength(2048, ErrorMessage = "Book Description Invalid Length", MinimumLength = 1)]
         public string Description { get; set; }
 
         [Required]
@@ -87,19 +84,6 @@ namespace LibrarySystem.Data.Models
             set
             {
                 this.genres = value;
-            }
-        }
-
-        public virtual ICollection<Lending> Lendings
-        {
-            get
-            {
-                return this.lendings;
-            }
-
-            set
-            {
-                this.lendings = value;
             }
         }
 

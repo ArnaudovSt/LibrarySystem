@@ -1,5 +1,7 @@
 using System.Data.Entity;
 using LibrarySystem.Data.UnitOfWork;
+using LibrarySystem.Services;
+using LibrarySystem.Services.Data.Contracts;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LibrarySystem.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(LibrarySystem.Web.App_Start.NinjectWebCommon), "Stop")]
@@ -79,14 +81,12 @@ namespace LibrarySystem.Web.App_Start
                     .BindDefaultInterface();
             });
 
-            //kernel.Bind(x =>
-            //{
-            //    x.From(Assembly.GetAssembly(CommonServicesAssemblyType).FullName,
-            //            Assembly.GetAssembly(DataServicesAssemblyType).FullName
-            //            )
-            //        .SelectAllClasses()
-            //        .BindDefaultInterface();
-            //});
+            kernel.Bind(x =>
+            {
+                x.FromAssemblyContaining(typeof(IBookService))
+                    .SelectAllClasses()
+                    .BindDefaultInterface();
+            });
 
             kernel.Bind(typeof(DbContext), typeof(LibrarySystemDbContext)).To<LibrarySystemDbContext>()
                 .InRequestScope();

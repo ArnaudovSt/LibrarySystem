@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bytes2you.Validation.2.0.0.0\lib\portable-win+net40+sl40+wp+Xbox40\Bytes2you.Validation.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -66,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LibrarySystem.Common\LibrarySystem.Common.csproj">
+      <Project>{573DDC5C-ED7E-4FF2-B316-896DC4A44158}</Project>
+      <Name>LibrarySystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibrarySystem.Data.Models\LibrarySystem.Data.Models.csproj">
       <Project>{317981AA-8936-4E59-BD71-0D7F8B40106C}</Project>
       <Name>LibrarySystem.Data.Models</Name>

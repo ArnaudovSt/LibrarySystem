@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bytes2you.Validation;
 using LibrarySystem.Data.Models.Contracts;
 
 namespace LibrarySystem.Data.Repositories
@@ -15,6 +16,8 @@ namespace LibrarySystem.Data.Repositories
 
         public EfRepostory(LibrarySystemDbContext context)
         {
+            Guard.WhenArgument(context, "EfRepostory dbcontext").IsNull().Throw();
+
             this.context = context;
         }
 
