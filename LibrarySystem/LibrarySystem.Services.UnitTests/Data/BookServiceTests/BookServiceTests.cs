@@ -17,7 +17,7 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
     {
         [Test]
         [Category("BookService.Constructor")]
-        public void Constructor_ShouldThrowArgumentNullException_WhenPassedNonExistingCategory()
+        public void Constructor_ShouldThrowArgumentNullException_WhenPassedNull()
         {
             // Arrange
             //Act
