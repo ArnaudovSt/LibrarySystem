@@ -13,9 +13,9 @@ namespace LibrarySystem.Web.ViewModels.Book
 
         public ICollection<Genre> Genres;
 
-        public ICollection<Comment> Comments;
+        public ICollection<Data.Models.Rating> Ratings;
 
-        public ICollection<Rating> Ratings;
+        public Guid Id { get; set; }
 
         public string Title { get; set; }
 

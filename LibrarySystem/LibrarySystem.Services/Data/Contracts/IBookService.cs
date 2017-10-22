@@ -13,5 +13,7 @@ namespace LibrarySystem.Services.Data.Contracts
         IQueryable<Book> GetLatestAddedBook();
 
         IQueryable<Book> GetBooksWithHighestRating();
+
+        double GetBookRating(Guid id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using Bytes2you.Validation;
 using LibrarySystem.Common;
@@ -14,7 +15,7 @@ namespace LibrarySystem.Services.Data
 
         public BookService(IEfRepostory<Book> bookRepository)
         {
-            Guard.WhenArgument(bookRepository, "bookRepository").IsNull().Throw();
+            Guard.WhenArgument(bookRepository, "Book Repository").IsNull().Throw();
 
             this.bookRepository = bookRepository;
         }
@@ -63,6 +64,21 @@ namespace LibrarySystem.Services.Data
         public IQueryable<Book> GetBooksWithHighestRating()
         {
             return this.bookRepository.All.OrderByDescending(b => b.Ratings.Sum(r => r.Value) / b.Ratings.Count).Take(GlobalConstants.HomeViewNumberOfBooksWithHighestRating);
+        }
+
+        public double GetBookRating(Guid id)
+        {
+            var book = this.bookRepository.All
+                .Where(b => b.Id == id)
+                .Include(b => b.Ratings)
+                .FirstOrDefault();
+
+            if (book.Ratings != null && book.Ratings.Count > 0)
+            {
+                return book.Ratings.Sum(r => r.Value) / book.Ratings.Count;
+            }
+
+            return 0;
         }
     }
 }

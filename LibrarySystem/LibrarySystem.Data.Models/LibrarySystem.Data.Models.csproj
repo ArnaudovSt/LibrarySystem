@@ -56,7 +56,6 @@
     <Compile Include="Abstractions\DataModel.cs" />
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
-    <Compile Include="Comment.cs" />
     <Compile Include="Contracts\IDeletable.cs" />
     <Compile Include="Contracts\IAuditable.cs" />
     <Compile Include="Genre.cs" />

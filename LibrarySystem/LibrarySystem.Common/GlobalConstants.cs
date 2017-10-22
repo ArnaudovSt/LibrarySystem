@@ -19,5 +19,7 @@ namespace LibrarySystem.Common
 
         public const int HomeViewNumberOfBooksWithHighestRating = 8;
         public const int HomeViewCacheDuration = 60 * 15;
+
+        public const int BookRatingDefaultValue = 0;
     }
 }

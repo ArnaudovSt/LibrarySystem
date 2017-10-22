@@ -1,0 +1,66 @@
+﻿@model LibrarySystem.Web.ViewModels.Rating.RatingViewModel
+@{
+    var displayNone = (int)Model.UserRating == 0;
+}
+
+@if (displayNone)
+{
+    <h5 class="text-center">
+        Book Rating:
+        <span class="text-primary">
+            @if (Model.BookRating > 0)
+            {
+                @(string.Format("{0:F2}", Model.BookRating))
+            }
+            else
+            {
+                @: Book still has no ratings.
+                                           }
+        </span>
+
+        @using (Ajax.BeginForm("Vote", new
+        {
+            id = Model.Id
+        }, new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnSuccess = ""
+        }))
+        {
+            @Html.AntiForgeryToken()
+            <h5 class="text-center form-group"> Your Vote:
+
+                <div class="form-control">
+                    <label>1
+                        <input type="radio" name="rating" value="1"/>
+                    </label>
+                    <label>2
+                        <input type="radio" name="rating" value="2"/>
+                    </label>
+                    <label>3
+                        <input type="radio" name="rating" value="3"/>
+                    </label>
+                    <label>4
+                        <input type="radio" name="rating" value="4"/>
+                    </label>
+                    <label>5
+                        <input type="radio" name="rating" value="5" checked/>
+                    </label>
+                </div>
+                <input id="sent" class="btn btn-primary" type="submit" value="Rate"/>
+            </h5>
+        }
+    </h5>
+}
+else
+{
+    <h5 class="text-center">Book Rating: @(string.Format("{0:F2}", Model.BookRating))</h5>
+
+    <div class="text-center">
+        You gave this book: <span>@(string.Format("{0:F2}", Model.UserRating))</span>.
+    </div>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/custom")
+}

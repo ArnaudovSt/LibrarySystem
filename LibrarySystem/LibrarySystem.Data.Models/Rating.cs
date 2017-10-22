@@ -12,7 +12,7 @@ namespace LibrarySystem.Data.Models
     {
         [Required]
         [Range(0.0, 5.0, ErrorMessage = "Invalid Book Rating")]
-        public float Value { get; set; }
+        public double Value { get; set; }
 
         public Guid BookId { get; set; }
 

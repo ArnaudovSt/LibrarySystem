@@ -18,8 +18,6 @@ namespace LibrarySystem.Data.Models
 
         private ICollection<Genre> genres;
 
-        private ICollection<Comment> comments;
-
         private ICollection<Rating> ratings;
 
         private ICollection<User> wantedBy;
@@ -28,7 +26,6 @@ namespace LibrarySystem.Data.Models
         {
             this.authors = new HashSet<Author>();
             this.genres = new HashSet<Genre>();
-            this.comments = new HashSet<Comment>();
             this.ratings = new HashSet<Rating>();
             this.wantedBy = new HashSet<User>();
         }
@@ -76,19 +73,6 @@ namespace LibrarySystem.Data.Models
             set
             {
                 this.genres = value;
-            }
-        }
-
-        public virtual ICollection<Comment> Comments
-        {
-            get
-            {
-                return this.comments;
-            }
-
-            set
-            {
-                this.comments = value;
             }
         }
 

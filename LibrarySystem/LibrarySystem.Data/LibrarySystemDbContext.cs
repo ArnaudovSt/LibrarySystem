@@ -19,7 +19,6 @@ namespace LibrarySystem.Data
 
         public IDbSet<Author> Authors { get; set; }
         public IDbSet<Book> Books { get; set; }
-        public IDbSet<Comment> Comments { get; set; }
         public IDbSet<Genre> Genres { get; set; }
         public IDbSet<Rating> Ratings { get; set; }
 

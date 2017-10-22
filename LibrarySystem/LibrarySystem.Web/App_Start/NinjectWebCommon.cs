@@ -93,6 +93,9 @@ namespace LibrarySystem.Web.App_Start
             kernel.Bind(typeof(IEfRepostory<>)).To(typeof(EfRepostory<>)).InRequestScope();
             kernel.Bind<IEfUnitOfWork>().To<EfUnitOfWork>().InRequestScope();
 
+            var context = kernel.Bind<HttpContext>().ToMethod(c => HttpContext.Current);
+            kernel.Bind<HttpContextBase>().To<HttpContextWrapper>().WithConstructorArgument(context);
+
             kernel.BindFilter<SaveChangesFilter>(FilterScope.Controller, 0).WhenActionMethodHas<SaveChangesAttribute>();
         }
     }

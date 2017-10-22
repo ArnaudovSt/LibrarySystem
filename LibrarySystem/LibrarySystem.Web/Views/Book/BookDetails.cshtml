@@ -30,14 +30,10 @@
             <li class="list-group-item">Year of Publishing: @Model.YearOfPublishing</li>
         </ul>
         <div id="rating" class="card-body">
-            Rating here
+            @Html.Action("GetRating", new { id = @Model.Id})
         </div>
         <div class="card-footer text-muted">
             &copy; LibrarySystem
         </div>
-    </div>
-    
-    <div id="comments" class="panel-footer">
-        Comments here
     </div>
 </div>
