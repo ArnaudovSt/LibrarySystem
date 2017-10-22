@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using LibrarySystem.Common
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - LibrarySystem</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -21,10 +22,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("My Books", "Index", "MyBooks", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Search", "Index", "Search", new { area = "" }, null)</li>
+                    @if (User.IsInRole(GlobalConstants.AdminRole))
+                    {
+                        <li>@Html.ActionLink("Admin", "Index", "Crud", new { area = GlobalConstants.AdminAreaName }, null)</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +38,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - LibrarySystem</p>
         </footer>
     </div>
 

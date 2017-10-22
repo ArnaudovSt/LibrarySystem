@@ -25,11 +25,11 @@ namespace LibrarySystem.Web.Controllers
             this.bookService = bookService;
         }
         // GET: Book
-        public ActionResult Index(Guid id)
+        public ActionResult BookDetails(Guid id)
         {
             var book = bookService
                 .GetBookById(id)
-                .QueryTo<DbTestViewModel>()
+                .QueryTo<BookDetailsViewModel>()
                 .FirstOrDefault();
 
             return View(book);

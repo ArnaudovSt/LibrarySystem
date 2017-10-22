@@ -1,0 +1,51 @@
+﻿@using LibrarySystem.Common
+@model LibrarySystem.Web.ViewModels.Search.SearchViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="container">
+    <div class="row">
+        @using (Ajax.BeginForm("Search", null,
+                                        new AjaxOptions()
+                                        {
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "search-results",
+                                            InsertionMode = InsertionMode.Replace
+                                        },
+                                        new { id = "search-form" }))
+        {
+            <h2>Search</h2>
+            @Html.ValidationSummary()
+            <div class="form-group">
+                @Html.LabelFor(m => m.SearchedWord, "Input:")
+                @Html.TextBoxFor(m => m.SearchedWord, new { @class = "form-control", placeholder = "Search" })
+            </div>
+            <p>Search by:</p>
+            <div class="form-inline">
+                <label>
+                    @Html.RadioButtonFor(m => m.Category, "Title", new { Checked = "checked" }) Title
+                </label>
+                <label>
+                    @Html.RadioButtonFor(m => m.Category, "Author") Author
+                </label>
+                <label>
+                    @Html.RadioButtonFor(m => m.Category, "Genre") Genre
+                </label>
+            </div>
+            <br />
+            <button class="btn btn-default" type="submit">Search</button>
+
+            @Html.AntiForgeryToken()
+        }
+
+        <br />
+        <div id="search-results" class="col-md-9">
+            There are no results yet.
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

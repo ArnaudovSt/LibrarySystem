@@ -52,8 +52,6 @@ namespace LibrarySystem.Data.Migrations
                                     By the end of the book, you'll be comfortable applying this powerful technique in your everyday .NET development.",
                                    PageCount = 584,
                                    YearOfPublishing = 2011,
-                                   InitialQuantity = 42,
-                                   Available = 42,
                                    Authors = new HashSet<Author>()
                                    {
                                        markSeemann
@@ -74,8 +72,6 @@ namespace LibrarySystem.Data.Migrations
                                     working with legacy code and even untestable code. The book discusses tools you need when testing databases and other technologies.",
                                                PageCount = 320,
                                                YearOfPublishing = 2009,
-                                               InitialQuantity = 37,
-                                               Available = 37,
                                                Authors = new HashSet<Author>()
                                                {
                                                    royOsherove
@@ -98,8 +94,6 @@ namespace LibrarySystem.Data.Migrations
                                     post-publication comments into the material here, but we'll see how that works out.",
                                                                PageCount = 533,
                                                                YearOfPublishing = 2003,
-                                                               InitialQuantity = 31,
-                                                               Available = 31,
                                                                Authors = new HashSet<Author>()
                                                                {
                                                                    martinFowler

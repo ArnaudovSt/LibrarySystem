@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LibrarySystem.Web.Controllers
 {
+    [Authorize]
     public class MyBooksController : Controller
     {
         // GET: MyBooks

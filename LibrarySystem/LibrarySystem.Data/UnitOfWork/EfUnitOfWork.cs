@@ -20,6 +20,11 @@ namespace LibrarySystem.Data.UnitOfWork
 
         public void SaveChanges()
         {
+            if (!this.context.ChangeTracker.HasChanges())
+            {
+                return;
+            }
+
             this.context.SaveChanges();
         }
     }

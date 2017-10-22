@@ -1,0 +1,22 @@
+﻿@model LibrarySystem.Web.ViewModels.Book.BookViewModel
+<div class="card text-center">
+    <div class="card-header">
+        @foreach (var genre in Model.Genres)
+        {
+            <text> @genre.Name </text>
+        }
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">@Model.Title</h4>
+        <p class="card-text">
+            @foreach (var author in Model.Authors)
+            {
+                <text> @author.FullName </text>
+            }
+        </p>
+        <a href="~/book/@Model.Id" class="btn btn-primary">Go to Book Details</a>
+    </div>
+    <div class="card-footer text-muted">
+        &copy; LibrarySystem
+    </div>
+</div>

@@ -53,14 +53,6 @@ namespace LibrarySystem.Data.Models
         [Range(1, 4096, ErrorMessage = "Book YearOfPublishing cannot be {0}. It must be between {1} and {2}.")]
         public int YearOfPublishing { get; set; }
 
-        [Required]
-        [Range(0, 2048, ErrorMessage = "Book Quantity cannot be {0}. It must be between {1} and {2}.")]
-        public int InitialQuantity { get; set; }
-
-        [Required]
-        [Range(0, 2048, ErrorMessage = "Book Available cannot be {0}. It must be between {1} and {2}.")]
-        public int Available { get; set; }
-
         public virtual ICollection<Author> Authors
         {
             get
