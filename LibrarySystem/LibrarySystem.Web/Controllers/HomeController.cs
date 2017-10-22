@@ -3,28 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Bytes2you.Validation;
+using LibrarySystem.Common;
+using LibrarySystem.Services.Data.Contracts;
+using LibrarySystem.Web.Infrastructure.Extensions;
+using LibrarySystem.Web.ViewModels.Book;
+using LibrarySystem.Web.ViewModels.Home;
 
 namespace LibrarySystem.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IBookService bookService;
+
+        public HomeController(IBookService bookService)
+        {
+            Guard.WhenArgument(bookService, "Book Service").IsNull().Throw();
+
+            this.bookService = bookService;
+        }
+
+        // TODO: !!!
+        //[OutputCache(Location = System.Web.UI.OutputCacheLocation.Server, Duration = GlobalConstants.HomeViewCacheDuration)]
         public ActionResult Index()
         {
-            return View();
-        }
+            var latest = this.bookService
+                .GetLatestAddedBook()
+                .QueryTo<LatestAddedBookViewModel>()
+                .FirstOrDefault();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            var topRated = this.bookService
+                .GetBooksWithHighestRating()
+                .QueryTo<BookViewModel>()
+                .ToList();
 
-            return View();
-        }
+            var resultViewModel = new HomeViewModel()
+            {
+                LatestBook = latest,
+                TopRatedBooks = topRated
+            };
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(resultViewModel);
         }
     }
 }

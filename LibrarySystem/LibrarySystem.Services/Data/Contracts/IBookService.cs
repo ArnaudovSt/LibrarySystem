@@ -9,5 +9,9 @@ namespace LibrarySystem.Services.Data.Contracts
         IQueryable<Book> GetBookById(Guid id);
 
         IQueryable<Book> Search(string searchPhrase, string category);
+
+        IQueryable<Book> GetLatestAddedBook();
+
+        IQueryable<Book> GetBooksWithHighestRating();
     }
 }

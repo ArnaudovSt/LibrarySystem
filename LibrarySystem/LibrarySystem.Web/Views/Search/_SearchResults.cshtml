@@ -1,6 +1,6 @@
 ﻿@model LibrarySystem.Web.ViewModels.Search.SearchResultsViewModel
 <div class="list-group">
-    <p class="list-group-item-heading">Result: @Model.Books.Count() books</p>
+    <p class="list-group-item-heading">Result: @Model.Books.Count() book(s)</p>
     @foreach (var book in Model.Books)
     {
         <div class="col-md-4 text-center list-group-item">

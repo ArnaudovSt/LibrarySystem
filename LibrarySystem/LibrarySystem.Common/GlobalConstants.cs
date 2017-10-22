@@ -16,5 +16,8 @@ namespace LibrarySystem.Common
         public const string AuthorSearchCategory = "Author";
         public const string GenreSearchCategory = "Genre";
         public const string SearchResultsPartial = "_SearchResults";
+
+        public const int HomeViewNumberOfBooksWithHighestRating = 8;
+        public const int HomeViewCacheDuration = 60 * 15;
     }
 }

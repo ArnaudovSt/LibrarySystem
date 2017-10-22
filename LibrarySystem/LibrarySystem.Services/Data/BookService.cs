@@ -40,7 +40,7 @@ namespace LibrarySystem.Services.Data
                 case GlobalConstants.AuthorSearchCategory:
                     {
                         return this.bookRepository.All
-                            .Where(b => b.Authors.Any(a => a.FirstName.ToLower().Contains(searchPhraseLower) || 
+                            .Where(b => b.Authors.Any(a => a.FirstName.ToLower().Contains(searchPhraseLower) ||
                             a.LastName.ToLower().Contains(searchPhraseLower)));
                     }
 
@@ -53,6 +53,16 @@ namespace LibrarySystem.Services.Data
 
                 default: throw new ArgumentException("Invalid Category!");
             }
+        }
+
+        public IQueryable<Book> GetLatestAddedBook()
+        {
+            return this.bookRepository.All.OrderByDescending(b => b.CreatedOn).Take(1);
+        }
+
+        public IQueryable<Book> GetBooksWithHighestRating()
+        {
+            return this.bookRepository.All.OrderByDescending(b => b.Ratings.Sum(r => r.Value) / b.Ratings.Count).Take(GlobalConstants.HomeViewNumberOfBooksWithHighestRating);
         }
     }
 }
