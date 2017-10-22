@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using LibrarySystem.Data.Models.Contracts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -11,7 +12,7 @@ namespace LibrarySystem.Data.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
 
-    public class User : IdentityUser
+    public class User : IdentityUser, IDeletable, IAuditable
     {
         private ICollection<Book> wantToRead;
 

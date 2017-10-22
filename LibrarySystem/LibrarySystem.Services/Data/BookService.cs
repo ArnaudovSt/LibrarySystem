@@ -80,5 +80,11 @@ namespace LibrarySystem.Services.Data
 
             return 0;
         }
+
+        public IQueryable<Book> GetBooksByUserId(Guid id)
+        {
+            return this.bookRepository.All
+                .Where(b => b.WantedBy.Any(u => u.Id == id.ToString()));
+        }
     }
 }
