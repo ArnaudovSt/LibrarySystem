@@ -28,10 +28,12 @@
             <li class="list-group-item">ISBN: @Model.ISBN</li>
             <li class="list-group-item">Page Count: @Model.PageCount</li>
             <li class="list-group-item">Year of Publishing: @Model.YearOfPublishing</li>
+            <li class="list-group-item">
+                <div id="rating" class="card-body">
+                    @Html.Action("GetRating", new { id = @Model.Id })
+                </div>
+            </li>
         </ul>
-        <div id="rating" class="card-body">
-            @Html.Action("GetRating", new { id = @Model.Id})
-        </div>
         <div class="card-footer text-muted">
             &copy; LibrarySystem
         </div>

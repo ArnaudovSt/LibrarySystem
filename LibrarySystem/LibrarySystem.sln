@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.Services", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.Common", "LibrarySystem.Common\LibrarySystem.Common.csproj", "{573DDC5C-ED7E-4FF2-B316-896DC4A44158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySystem.Services.UnitTests", "LibrarySystem.Services.UnitTests\LibrarySystem.Services.UnitTests.csproj", "{EC551A2C-F2BD-4EF8-958C-0FA1810A90C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{573DDC5C-ED7E-4FF2-B316-896DC4A44158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{573DDC5C-ED7E-4FF2-B316-896DC4A44158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{573DDC5C-ED7E-4FF2-B316-896DC4A44158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC551A2C-F2BD-4EF8-958C-0FA1810A90C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC551A2C-F2BD-4EF8-958C-0FA1810A90C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC551A2C-F2BD-4EF8-958C-0FA1810A90C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC551A2C-F2BD-4EF8-958C-0FA1810A90C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
