@@ -1,5 +1,43 @@
-﻿@{
+﻿@model LibrarySystem.Web.ViewModels.Book.BookDetailsViewModel
+
+@{
     ViewBag.Title = "Book Details";
 }
 
-<h1>Book Details</h1>
+<div class="panel-group">
+    <h1 class="text-center panel-heading">@Model.Title</h1>
+
+    <div class="card text-center panel-body">
+        <div class="card-header">
+            @foreach (var genre in Model.Genres)
+            {
+                <text> @genre.Name </text>
+            }
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">
+                By:
+                @foreach (var author in Model.Authors)
+                {
+                    <text> @author.FullName </text>
+                }
+            </h4>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ISBN: @Model.ISBN</li>
+            <li class="list-group-item">Page Count: @Model.PageCount</li>
+            <li class="list-group-item">Year of Publishing: @Model.YearOfPublishing</li>
+        </ul>
+        <div id="rating" class="card-body">
+            Rating here
+        </div>
+        <div class="card-footer text-muted">
+            &copy; LibrarySystem
+        </div>
+    </div>
+    
+    <div id="comments" class="panel-footer">
+        Comments here
+    </div>
+</div>
