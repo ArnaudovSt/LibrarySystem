@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BookControllerTests\BookControllerTests.cs" />
     <Compile Include="Controllers\HomeControllerTests\HomeControllerTests.cs" />
     <Compile Include="Controllers\MyBooksControllerTests\MyBooksControllerTests.cs" />
     <Compile Include="Controllers\SearchControllerTests\SearchControllerTests.cs" />
@@ -91,6 +92,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LibrarySystem.Common\LibrarySystem.Common.csproj">
+      <Project>{573DDC5C-ED7E-4FF2-B316-896DC4A44158}</Project>
+      <Name>LibrarySystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibrarySystem.Data.Models\LibrarySystem.Data.Models.csproj">
       <Project>{317981AA-8936-4E59-BD71-0D7F8B40106C}</Project>
       <Name>LibrarySystem.Data.Models</Name>
