@@ -1,8 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using LibrarySystem.Common;
 using LibrarySystem.Data;
 using LibrarySystem.Data.Migrations;
 using LibrarySystem.Web.App_Start;
@@ -25,6 +28,16 @@ namespace LibrarySystem.Web
 
             var mapper = new AutoMapperConfig();
             mapper.Execute(Assembly.GetExecutingAssembly());
+        }
+
+        public override string GetVaryByCustomString(HttpContext context, string arg)
+        {
+            if (arg.Equals(GlobalConstants.CacheVaryByCustom, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return context.User.Identity.Name;
+            }
+
+            return base.GetVaryByCustomString(context, arg);
         }
     }
 }

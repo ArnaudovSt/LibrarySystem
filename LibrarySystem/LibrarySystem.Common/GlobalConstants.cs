@@ -22,5 +22,7 @@ namespace LibrarySystem.Common
 
         public const int BookRatingDefaultValue = 0;
         public const string JavascriptResponse = "location.reload(true)";
+
+        public const string CacheVaryByCustom = "User";
     }
 }

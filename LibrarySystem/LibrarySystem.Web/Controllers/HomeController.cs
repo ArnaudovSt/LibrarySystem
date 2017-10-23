@@ -23,7 +23,7 @@ namespace LibrarySystem.Web.Controllers
             this.bookService = bookService;
         }
 
-        [OutputCache(Location = System.Web.UI.OutputCacheLocation.Server, Duration = GlobalConstants.HomeViewCacheDuration)]
+        [OutputCache(Location = System.Web.UI.OutputCacheLocation.Server, Duration = GlobalConstants.HomeViewCacheDuration, VaryByCustom = GlobalConstants.CacheVaryByCustom)]
         public ActionResult Index()
         {
             var latest = this.bookService
