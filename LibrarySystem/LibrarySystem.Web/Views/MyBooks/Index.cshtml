@@ -1,5 +1,25 @@
-﻿@{
+﻿@model IEnumerable<LibrarySystem.Web.ViewModels.Book.BookViewModel>
+
+@{
     ViewBag.Title = "My Books";
 }
 
-<h2>My Books</h2>
+<div class="list-group">
+    <p class="list-group-item-heading text-center">My book(s):</p>
+    @if (Model.Any())
+    {
+        foreach (var book in Model)
+        {
+            <div class="col-md-4 text-center list-group-item">
+                @Html.DisplayFor(_ => book)
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center list-group-item">
+            <text> still have no books added.</text>
+        </div>
+    }
+
+</div>

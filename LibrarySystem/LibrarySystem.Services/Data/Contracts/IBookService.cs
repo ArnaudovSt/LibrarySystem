@@ -17,5 +17,7 @@ namespace LibrarySystem.Services.Data.Contracts
         double GetBookRating(Guid id);
 
         void Add(string modelAuthorFirstName, string modelAuthorLastName, string modelDescription, string modelGenreName, string modelIsbn, int modelPageCount, string modelTitle, int modelYearOfPublishing);
+
+        IQueryable<Book> GetBooksByUserId(Guid id);
     }
 }

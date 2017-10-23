@@ -17,12 +17,41 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
     {
         [Test]
         [Category("BookService.Constructor")]
-        public void Constructor_ShouldThrowArgumentNullException_WhenPassedNull()
+        public void Constructor_ShouldThrowArgumentNullException_WhenPassedNullBookRepository()
         {
             // Arrange
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             //Act
             //Asssert
-            Assert.Throws<ArgumentNullException>(() => new BookService(null));
+            Assert.Throws<ArgumentNullException>(() => new BookService(null, mockedGenreRepo.Object, mockedAuthorRepo.Object));
+        }
+
+        [Test]
+        [Category("BookService.Constructor")]
+        public void Constructor_ShouldThrowArgumentNullException_WhenPassedNullGenreRepository()
+        {
+            // Arrange
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
+            //Act
+            //Asssert
+            Assert.Throws<ArgumentNullException>(() => new BookService(mockedBookRepo.Object, null, mockedAuthorRepo.Object));
+        }
+
+        [Test]
+        [Category("BookService.Constructor")]
+        public void Constructor_ShouldThrowArgumentNullException_WhenPassedNullAuthorRepository()
+        {
+            // Arrange
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
+            //Act
+            //Asssert
+            Assert.Throws<ArgumentNullException>(() => new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, null));
         }
 
         [Test]
@@ -30,10 +59,12 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Constructor_ShouldCreateAnInstanceOfBookService_WhenPassedValidInput()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             //Act
-            var result = new BookService(mockedRepo.Object);
+            var result = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Asssert
             Assert.That(result, Is.InstanceOf<BookService>());
@@ -44,7 +75,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBookById_ShouldReturnCorrectQuery_WhenPassedExistingId()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
             var book = new Book() { Id = guid };
             var query = new List<Book>()
@@ -52,9 +85,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBookById(guid);
@@ -68,7 +101,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBookById_ShouldReturnCorrectBook_WhenPassedExistingId()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
             var book = new Book() { Id = guid };
             var query = new List<Book>()
@@ -76,9 +111,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBookById(guid).First();
@@ -92,7 +127,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBookById_ShouldReturnEmptyQuery_WhenPassedNonExistingId()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
             var book = new Book();
             var query = new List<Book>()
@@ -100,9 +137,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBookById(guid);
@@ -116,7 +153,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBookById_ShouldReturnNull_WhenPassedNonExistingId()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
             var book = new Book();
             var query = new List<Book>()
@@ -124,9 +163,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBookById(guid).FirstOrDefault();
@@ -140,8 +179,10 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldThrowArgumentException_WhenPassedNonExistingCategory()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
-            var sut = new BookService(mockedRepo.Object);
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             //Asssert
@@ -153,7 +194,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnCorrectQuery_WhenSearchedByTitle()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -179,9 +222,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(testTitle, GlobalConstants.TitleSearchCategory);
@@ -195,7 +238,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnEmptyQuery_WhenSearchedByNonExistingTitle()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -222,9 +267,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(empty, GlobalConstants.TitleSearchCategory);
@@ -238,7 +283,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnCorrectBook_WhenSearchedByTitle()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -264,9 +311,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(testTitle, GlobalConstants.TitleSearchCategory).First();
@@ -280,8 +327,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnCorrectQuery_WhenSearchedByAuthor()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
-
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
             string testGenre = "testGenre";
@@ -306,9 +354,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(testAuthor, GlobalConstants.AuthorSearchCategory);
@@ -322,7 +370,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnEmptyQuery_WhenSearchedByNonExistingAuthor()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -350,9 +400,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(empty, GlobalConstants.AuthorSearchCategory);
@@ -366,7 +416,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnCorrectBook_WhenSearchedByAuthor()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -392,9 +444,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(testAuthor, GlobalConstants.AuthorSearchCategory).First();
@@ -408,7 +460,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnCorrectQuery_WhenSearchedByGenre()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -434,9 +488,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(testGenre, GlobalConstants.GenreSearchCategory);
@@ -450,7 +504,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnEmptyQuery_WhenSearchedByNonExistingGenre()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -477,9 +533,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(empty, GlobalConstants.GenreSearchCategory);
@@ -493,7 +549,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void Search_ShouldReturnCorrectBook_WhenSearchedByGenre()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             string testTitle = "testTitle";
             string testAuthor = "testAuthor";
@@ -519,9 +577,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.Search(testGenre, GlobalConstants.GenreSearchCategory).First();
@@ -535,7 +593,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetLatestAddedBook_ShouldReturnCorrectQuery_WhenPassedValidArguments()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             var firstBook = new Book()
             {
@@ -553,9 +613,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 secondBook
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetLatestAddedBook();
@@ -570,13 +630,15 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetLatestAddedBook_ShouldReturnEmptyQuery_WhenBookCollectionIsEmpty()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             var query = new List<Book>().AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetLatestAddedBook();
@@ -590,7 +652,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBooksWithHighestRating_ShouldReturnCorrectQuery_WhenPassedValidArguments()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             var first = new Book()
             {
@@ -716,9 +780,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 ninth
             };
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBooksWithHighestRating();
@@ -733,13 +797,15 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBooksWithHighestRating_ShouldReturnEmptyQuery_WhenPassedEmptyBooksList()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
 
             var query = new List<Book>().AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBooksWithHighestRating();
@@ -753,7 +819,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBookRating_ShouldReturnZero_WhenBookHasNoRatings()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
             var book = new Book()
             {
@@ -764,9 +832,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBookRating(guid);
@@ -780,7 +848,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBookRating_ShouldReturnCorrectRating_WhenBookHasRatings()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
 
             var rating = new Rating()
@@ -802,9 +872,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBookRating(guid);
@@ -818,7 +888,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBooksByUserId_ShouldReturnCorrectQuery_WhenPassedValidArguments()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
             var user = new User()
             {
@@ -838,9 +910,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBooksByUserId(guid);
@@ -854,7 +926,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
         public void GetBooksByUserId_ShouldReturnEmptyQuery_WhenSearchedByNonexistingGuid()
         {
             // Arrange
-            var mockedRepo = new Mock<IEfRepostory<Book>>();
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
             var guid = Guid.NewGuid();
             var user = new User()
             {
@@ -874,9 +948,9 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
                 book
             }.AsQueryable();
 
-            mockedRepo.Setup(x => x.All).Returns(query);
+            mockedBookRepo.Setup(x => x.All).Returns(query);
 
-            var sut = new BookService(mockedRepo.Object);
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
 
             //Act
             var result = sut.GetBooksByUserId(Guid.NewGuid());

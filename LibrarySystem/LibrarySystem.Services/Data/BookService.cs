@@ -20,7 +20,7 @@ namespace LibrarySystem.Services.Data
         {
             Guard.WhenArgument(bookRepository, "Book Repository").IsNull().Throw();
             Guard.WhenArgument(genresRepository, "Genre Repository").IsNull().Throw();
-            Guard.WhenArgument(bookRepository, "Author Repository").IsNull().Throw();
+            Guard.WhenArgument(authorRepository, "Author Repository").IsNull().Throw();
 
             this.bookRepository = bookRepository;
             this.genresRepository = genresRepository;
