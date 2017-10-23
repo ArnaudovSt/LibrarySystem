@@ -15,9 +15,8 @@ namespace LibrarySystem.Data.Migrations
     {
         public MigrationsConfiguration()
         {
-            // TODO: !!!
-            this.AutomaticMigrationsEnabled = true;
-            this.AutomaticMigrationDataLossAllowed = true;
+            this.AutomaticMigrationsEnabled = false;
+            this.AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(LibrarySystem.Data.LibrarySystemDbContext context)

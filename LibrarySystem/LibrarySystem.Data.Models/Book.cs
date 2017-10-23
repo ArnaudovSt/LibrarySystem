@@ -10,7 +10,6 @@ using LibrarySystem.Data.Models.Abstractions;
 
 namespace LibrarySystem.Data.Models
 {
-    // TODO: Add Book Cover Picture
     public class Book : DataModel
     {
 

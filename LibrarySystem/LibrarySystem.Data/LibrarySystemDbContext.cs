@@ -53,13 +53,12 @@ namespace LibrarySystem.Data
             return new LibrarySystemDbContext();
         }
 
-        // TODO: !!!
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        //    modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
-        //    base.OnModelCreating(modelBuilder);
-        //}
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
