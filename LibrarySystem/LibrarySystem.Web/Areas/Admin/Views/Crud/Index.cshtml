@@ -2,11 +2,65 @@
 @{
     ViewBag.Title = "Add Book";
 }
-<div class="container main-content">
-    <h2>Add a book...</h2>
-    @Html.EditorForModel()
+<h2 class="text-center">Add book</h2>
+<div class="container text-center row">
+    @using (Html.BeginForm("Index", "Crud", FormMethod.Post,
+                                        new { enctype = "multipart/form-data", @class = "form-group" }))
+    {
+        @Html.ValidationSummary(true, "Please Fix the issues before submitting the form.")
+        @Html.AntiForgeryToken()
+
+        <div class="form-group text-center">
+            @Html.LabelFor(m => m.Title, "Book Title:")
+            @Html.TextBoxFor(m => m.Title)
+            @Html.ValidationMessageFor(m => m.Title)
+        </div>
+        <div class="form-group text-center">
+
+            @Html.LabelFor(m => m.ISBN, "Book ISBN:")
+            @Html.TextBoxFor(m => m.ISBN)
+            @Html.ValidationMessageFor(m => m.ISBN)
+        </div>
+        <div class="form-group text-center">
+
+            @Html.LabelFor(m => m.Description, "Description:")
+            @Html.TextAreaFor(m => m.Description)
+            @Html.ValidationMessageFor(m => m.AuthorLastName)
+        </div>
+        <div class="form-group text-center">
+
+            @Html.LabelFor(m => m.PageCount, "Book Page Count:")
+            @Html.TextBoxFor(m => m.PageCount)
+            @Html.ValidationMessageFor(m => m.PageCount)
+        </div>
+        <div class="form-group text-center">
+
+            @Html.LabelFor(m => m.YearOfPublishing, "Year Of Publishing:")
+            @Html.TextBoxFor(m => m.YearOfPublishing)
+            @Html.ValidationMessageFor(m => m.YearOfPublishing)
+        </div>
+        <div class="form-group text-center">
+
+            @Html.LabelFor(m => m.AuthorFirstName, "Author First Name:")
+            @Html.TextBoxFor(m => m.AuthorFirstName)
+            @Html.ValidationMessageFor(m => m.AuthorFirstName)
+        </div>
+        <div class="form-group text-center">
+
+            @Html.LabelFor(m => m.AuthorLastName, "Author Last Name:")
+            @Html.TextBoxFor(m => m.AuthorLastName)
+            @Html.ValidationMessageFor(m => m.AuthorLastName)
+        </div>
+        <div class="form-group text-center">
+
+            @Html.LabelFor(m => m.GenreName, "Genre name:")
+            @Html.TextBoxFor(m => m.GenreName)
+            @Html.ValidationMessageFor(m => m.GenreName)
+        </div>
+        <input type="submit" value="Add Book" class="btn btn-primary" />
+    }
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @*@Scripts.Render("~/bundles/jquery-datepicker")*@
 }

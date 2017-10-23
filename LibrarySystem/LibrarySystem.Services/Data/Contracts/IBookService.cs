@@ -15,5 +15,7 @@ namespace LibrarySystem.Services.Data.Contracts
         IQueryable<Book> GetBooksWithHighestRating();
 
         double GetBookRating(Guid id);
+
+        void Add(string modelAuthorFirstName, string modelAuthorLastName, string modelDescription, string modelGenreName, string modelIsbn, int modelPageCount, string modelTitle, int modelYearOfPublishing);
     }
 }
