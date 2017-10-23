@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bytes2you.Validation;
+using LibrarySystem.Common;
 using LibrarySystem.Data.Models;
 using LibrarySystem.Data.Repositories;
 using LibrarySystem.Services.Common.Contracts;
 using LibrarySystem.Services.Data;
 using LibrarySystem.Services.Data.Contracts;
+using LibrarySystem.Web.Infrastructure.Attributes;
 using LibrarySystem.Web.Infrastructure.Extensions;
 using LibrarySystem.Web.ViewModels.Book;
 
@@ -41,6 +43,17 @@ namespace LibrarySystem.Web.Controllers
                 .ToList();
 
             return View(books);
+        }
+
+        [HttpPost]
+        [SaveChanges]
+        public ActionResult Index(Guid id)
+        {
+            var book = this.bookService.GetBookById(id).FirstOrDefault();
+            var userId = this.identityService.GetUserId();
+            this.userService.AddBook(userId, book);
+
+            return JavaScript(GlobalConstants.JavascriptRedirect);
         }
     }
 }

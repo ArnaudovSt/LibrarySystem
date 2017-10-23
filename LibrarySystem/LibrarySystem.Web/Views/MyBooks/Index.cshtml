@@ -4,22 +4,23 @@
     ViewBag.Title = "My Books";
 }
 
-<div class="list-group">
-    <p class="list-group-item-heading text-center">My book(s):</p>
-    @if (Model.Any())
-    {
-        foreach (var book in Model)
+<div class="container text-center">
+    <div class="list-group">
+        <h2 class="list-group-item-heading text-center">My book(s):</h2>
+        @if (Model.Any())
         {
-            <div class="col-md-4 text-center list-group-item">
-                @Html.DisplayFor(_ => book)
+            foreach (var book in Model)
+            {
+                <div class="col-md-4 text-center list-group-item">
+                    @Html.DisplayFor(_ => book)
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center list-group-item">
+                <text> still have no books added.</text>
             </div>
         }
-    }
-    else
-    {
-        <div class="text-center list-group-item">
-            <text> still have no books added.</text>
-        </div>
-    }
-
+    </div>
 </div>

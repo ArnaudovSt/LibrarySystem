@@ -34,6 +34,11 @@
                 </div>
             </li>
         </ul>
+        @Ajax.ActionLink("Want To Read", "Index", "MyBooks", new
+        {
+            id = Model.Id
+        
+        }, new AjaxOptions() { HttpMethod = "Post" }, new {@class="btn btn-primary"})
         <div class="card-footer text-muted">
             &copy; LibrarySystem
         </div>

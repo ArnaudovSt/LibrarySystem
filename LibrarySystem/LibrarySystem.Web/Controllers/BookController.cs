@@ -76,7 +76,7 @@ namespace LibrarySystem.Web.Controllers
 
             this.ratingService.AddRating(id, userId, rating);
 
-            return JavaScript(GlobalConstants.JavascriptResponse);
+            return JavaScript(GlobalConstants.JavascriptRefresh);
         }
     }
 }

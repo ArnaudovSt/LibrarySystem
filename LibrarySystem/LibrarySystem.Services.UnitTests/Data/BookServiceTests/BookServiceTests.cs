@@ -958,6 +958,178 @@ namespace LibrarySystem.Services.UnitTests.Data.BookServiceTests
             //Asssert
             CollectionAssert.IsEmpty(result);
         }
+
+        [Test]
+        [Category("BookService.Add")]
+        public void Add_ShouldCallAddOnBookRepository_WhenValidArgumentsArePassed()
+        {
+            // Arrange
+            string authorFirstName = "test";
+            string authorLastName = "test";
+            string description = "test";
+            string title = "test";
+            string genreName = "test";
+            string Isbn = "9780307264787";
+            int pageCount = 15;
+            int yearOfPublish = 2000;
+
+            var genre = new Genre()
+            {
+                Name = genreName
+            };
+
+            var genreQuery = new List<Genre>()
+            {
+                genre
+            }
+            .AsQueryable();
+
+            var author = new Author()
+            {
+                FirstName = authorFirstName,
+                LastName = authorLastName
+            };
+
+            var authorQuery = new List<Author>()
+            {
+                author
+            }.AsQueryable();
+
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            mockedBookRepo.Setup(b => b.Add(It.IsAny<Book>()));
+
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            mockedGenreRepo.Setup(g => g.All).Returns(genreQuery);
+
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
+            mockedAuthorRepo.Setup(g => g.All).Returns(authorQuery);
+
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
+
+            //Act
+            sut.Add(authorFirstName, authorLastName, description, genreName, Isbn, pageCount, title,
+                yearOfPublish);
+
+            //Asssert
+            mockedBookRepo.Verify(x => x.Add(It.Is<Book>(b => b.ISBN == Isbn &&
+                                                              b.Title == title &&
+                                                              b.Authors.Contains(author) &&
+                                                              b.Genres.Contains(genre) &&
+                                                              b.Description == description &&
+                                                              b.YearOfPublishing == yearOfPublish &&
+                                                              b.ISBN == Isbn &&
+                                                              b.PageCount == pageCount)), Times.Once);
+        }
+
+        [Test]
+        [Category("BookService.Add")]
+        public void Add_ShouldQueryOnGenresRepository_WhenValidArgumentsArePassed()
+        {
+            // Arrange
+            string authorFirstName = "test";
+            string authorLastName = "test";
+            string description = "test";
+            string title = "test";
+            string genreName = "test";
+            string Isbn = "9780307264787";
+            int pageCount = 15;
+            int yearOfPublish = 2000;
+
+            var genre = new Genre()
+            {
+                Name = genreName
+            };
+
+            var genreQuery = new List<Genre>()
+                {
+                    genre
+                }
+                .AsQueryable();
+
+            var author = new Author()
+            {
+                FirstName = authorFirstName,
+                LastName = authorLastName
+            };
+
+            var authorQuery = new List<Author>()
+            {
+                author
+            }.AsQueryable();
+
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            mockedBookRepo.Setup(b => b.Add(It.IsAny<Book>()));
+
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            mockedGenreRepo.Setup(g => g.All).Returns(genreQuery);
+
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
+            mockedAuthorRepo.Setup(g => g.All).Returns(authorQuery);
+
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
+
+            //Act
+            sut.Add(authorFirstName, authorLastName, description, genreName, Isbn, pageCount, title,
+                yearOfPublish);
+
+            //Asssert
+            mockedGenreRepo.Verify(x => x.All, Times.Once);
+        }
+
+        [Test]
+        [Category("BookService.Add")]
+        public void Add_ShouldQueryOnAuthorsRepository_WhenValidArgumentsArePassed()
+        {
+            // Arrange
+            string authorFirstName = "test";
+            string authorLastName = "test";
+            string description = "test";
+            string title = "test";
+            string genreName = "test";
+            string Isbn = "9780307264787";
+            int pageCount = 15;
+            int yearOfPublish = 2000;
+
+            var genre = new Genre()
+            {
+                Name = genreName
+            };
+
+            var genreQuery = new List<Genre>()
+                {
+                    genre
+                }
+                .AsQueryable();
+
+            var author = new Author()
+            {
+                FirstName = authorFirstName,
+                LastName = authorLastName
+            };
+
+            var authorQuery = new List<Author>()
+            {
+                author
+            }.AsQueryable();
+
+            var mockedBookRepo = new Mock<IEfRepostory<Book>>();
+            mockedBookRepo.Setup(b => b.Add(It.IsAny<Book>()));
+
+            var mockedGenreRepo = new Mock<IEfRepostory<Genre>>();
+            mockedGenreRepo.Setup(g => g.All).Returns(genreQuery);
+
+            var mockedAuthorRepo = new Mock<IEfRepostory<Author>>();
+            mockedAuthorRepo.Setup(g => g.All).Returns(authorQuery);
+
+            var sut = new BookService(mockedBookRepo.Object, mockedGenreRepo.Object, mockedAuthorRepo.Object);
+
+            //Act
+            sut.Add(authorFirstName, authorLastName, description, genreName, Isbn, pageCount, title,
+                yearOfPublish);
+
+            //Asssert
+            mockedAuthorRepo.Verify(x => x.All, Times.Once);
+        }
     }
 }
 

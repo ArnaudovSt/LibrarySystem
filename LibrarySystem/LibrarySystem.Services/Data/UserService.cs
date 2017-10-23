@@ -21,7 +21,9 @@ namespace LibrarySystem.Services.Data
 
         public void AddBook(Guid userId, Book book)
         {
-            this.userRepository.All.FirstOrDefault(u => u.Id == userId.ToString())?.WantToRead.Add(book);
+            this.userRepository
+                .All
+                .FirstOrDefault(u => u.Id == userId.ToString())?.WantToRead.Add(book);
         }
     }
 }
