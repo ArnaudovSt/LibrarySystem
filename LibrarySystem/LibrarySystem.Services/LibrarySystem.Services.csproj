@@ -65,6 +65,7 @@
     <Compile Include="Data\BookService.cs" />
     <Compile Include="Data\Contracts\IBookService.cs" />
     <Compile Include="Data\Contracts\IRatingService.cs" />
+    <Compile Include="Data\Contracts\IUserService.cs" />
     <Compile Include="Data\RatingService.cs" />
     <Compile Include="Data\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

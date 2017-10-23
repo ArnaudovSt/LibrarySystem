@@ -21,5 +21,6 @@ namespace LibrarySystem.Common
         public const int HomeViewCacheDuration = 60 * 15;
 
         public const int BookRatingDefaultValue = 0;
+        public const string JavascriptResponse = "location.reload(true)";
     }
 }

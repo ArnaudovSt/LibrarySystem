@@ -9,7 +9,7 @@ using LibrarySystem.Data.Repositories;
 
 namespace LibrarySystem.Services.Data
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IEfRepostory<User> userRepository;
 

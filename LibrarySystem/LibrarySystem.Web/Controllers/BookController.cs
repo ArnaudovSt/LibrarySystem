@@ -14,6 +14,7 @@ using LibrarySystem.Web.Infrastructure.Attributes;
 using LibrarySystem.Web.Infrastructure.Extensions;
 using LibrarySystem.Web.ViewModels.Book;
 using LibrarySystem.Web.ViewModels.Rating;
+using LibrarySystem.Common;
 
 namespace LibrarySystem.Web.Controllers
 {
@@ -75,7 +76,7 @@ namespace LibrarySystem.Web.Controllers
 
             this.ratingService.AddRating(id, userId, rating);
 
-            return JavaScript("location.reload(true)");
+            return JavaScript(GlobalConstants.JavascriptResponse);
         }
     }
 }
